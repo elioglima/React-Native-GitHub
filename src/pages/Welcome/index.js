@@ -14,7 +14,7 @@ import {
 import {colors} from '../../styles';
 import api from '../../services/api';
 
-export default class logIn extends React.Component {
+export default class Welcome extends React.Component {
   state = {
     username: '',
     errLogin: false,
@@ -38,7 +38,7 @@ export default class logIn extends React.Component {
       await this.checkUserExists(username);
       await this.saveUser(username);
       const {navigation} = this.props;
-      navigation.navigate('Account');
+      navigation.navigate('User');
     } catch (error) {
       this.setState({loading: false});
       this.setState({errLogin: true});
