@@ -54,14 +54,14 @@ export default class Welcome extends React.Component {
         />
         <Text style={styles.title}>Bem Vindo</Text>
         <Text style={styles.text}>
-          Para continuar é preciso que voçê informe o seu usuário no GitHub.
+          Para continuar é preciso que você informe o seu usuário no GitHub.
         </Text>
         <View style={styles.form}>
           <TextInput
             style={styles.input}
             autoCapitalize="none"
             autoCorrect={false}
-            placeholder="Digite seu usuátio"
+            placeholder="Digite seu usuário"
             underlineColorAndroid="transparent"
             value={this.state.username}
             onChangeText={text => this.setState({ username: text })}
