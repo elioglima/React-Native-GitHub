@@ -5,7 +5,7 @@ import {
 } from 'react-navigation';
 import Welcome from './pages/Welcome';
 import Repositories from './pages/Repositories';
-import Organizations from './pages/Organizations';
+import Follower from './pages/Follower';
 
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { colors } from './styles';
@@ -17,7 +17,7 @@ const Routes = (userLogged = false) =>
         Welcome,
         User: createBottomTabNavigator({
           Repositories,
-          Organizations
+          Follower,
         }, {
           tabBarOptions: {
             showIcon: true,

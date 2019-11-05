@@ -1,6 +1,6 @@
 import React from 'react';
 import createNavigator from './routes';
-import {AsyncStorage} from 'react-native';
+import { AsyncStorage } from 'react-native';
 
 export default class App extends React.Component {
   state = {
@@ -9,8 +9,8 @@ export default class App extends React.Component {
   };
 
   async componentDidMount() {
-    const username = await AsyncStorage.getItem('@GitHuber:username');
-    this.setState({userChecked: true, userLogged: !!username});
+    const onLine = await AsyncStorage.getItem('@GitHuber:status');
+    this.setState({ userChecked: true, userLogged: (onLine == 'OnLine') });
   }
 
   render() {

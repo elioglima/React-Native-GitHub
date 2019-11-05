@@ -44,6 +44,8 @@ target 'reactGithub' do
 
   pod 'RNScreens', :path => '../node_modules/react-native-screens'
 
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
   target 'reactGithubTests' do
     inherit! :search_paths
     # Pods for testing

@@ -21,43 +21,66 @@ class Repositories extends React.Component {
     this.state = {
       data: [],
       loading: true,
+      refreshing: false,
     }
   }
   static navigationOptions = {
-    tabBarIcon: ({ tintColor }) => <Icon name="list-alt" size={20} color={tintColor} />
+    tabBarIcon: ({ tintColor }) => <Icon name="folder-o" size={20} color={tintColor} />
   }
 
-  async componentDidMount() {
+  loadRepositories = async () => {
+    this.setState({ loadRepository: true })
+    const username = await AsyncStorage.getItem('@GitHuber:username')
+    const repositoryStringify = await AsyncStorage.getItem(`@GitHuber${username}:repos`);
+    let repositories = JSON.parse(repositoryStringify)
+    if (!repositories) repositories = []
+
+    if (repositories.length == 0) {
+      const { data } = await api.get(`/users/${username}/repos`)
+      await AsyncStorage.setItem(`@GitHuber${username}:repos`, JSON.stringify(data));
+      if (data)
+        repositories = data
+    }
+
+    this.setState({ data: repositories, loading: false, loadRepository: false })
+  }
+
+  loadRefreshData = async () => {
+    this.setState({ loadRepository: true })
     const username = await AsyncStorage.getItem('@GitHuber:username')
     const { data } = await api.get(`/users/${username}/repos`)
-    this.setState({ data, loading: false })
+    let repositories = []
+    if (data) repositories = data
+    await AsyncStorage.setItem(`@GitHuber${username}:repos`, JSON.stringify(repositories));
+    this.setState({ data: repositories, loading: false, loadRepository: false })
+  }
+
+
+  componentDidMount() {
+    this.loadRepositories()
   }
 
   renderListItem = ({ item }) => <RepositoryItem repository={item} />
 
   renderList = () => {
     const { data } = this.state
-    console.log('renderList')
     return (
-      <SafeAreaView >
-        <FlatList
-          data={data}
-          keyExtractor={item => String(item.id)}
-          renderItem={this.renderListItem}
-        />
-      </SafeAreaView>
+      <FlatList
+        data={data}
+        keyExtractor={item => String(item.id)}
+        renderItem={this.renderListItem}
+        onRefresh={this.loadRefreshData}
+        refreshing={this.state.refreshing}
+      />
     )
   }
 
   render() {
     return (
-      <SafeAreaView>
+      <View style={styles.baseContainer}>
         <Header title={'Repositórios'} />
-        <View style={styles.container}>
-          {this.state.loading ? <ActivityIndicator style={styles.loading} /> : this.renderList()}
-        </View>
-
-      </SafeAreaView>
+        {this.state.loading ? <ActivityIndicator style={styles.loading} /> : this.renderList()}
+      </View>
     );
   }
 };

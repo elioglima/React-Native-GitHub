@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     borderRadius: metrics.baseRadius,
     padding: metrics.basePadding,
     marginHorizontal: metrics.baseMargin * 2,
-    marginTop: metrics.baseMargin,
+    marginTop: 7,
   },
   title: {
     fontSize: 14,

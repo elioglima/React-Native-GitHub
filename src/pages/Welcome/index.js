@@ -17,6 +17,7 @@ import api from '../../services/api';
 export default class Welcome extends React.Component {
   state = {
     username: '',
+    userData: {},
     errLogin: false,
     loading: false,
   };
@@ -26,17 +27,15 @@ export default class Welcome extends React.Component {
     return user;
   };
 
-  saveUser = async username => {
-    await AsyncStorage.setItem('@GitHuber:username', username);
-  };
-
   signIn = async () => {
     const { username } = this.state;
     this.setState({ loading: true });
 
     try {
-      await this.checkUserExists(username);
-      await this.saveUser(username);
+      const response = await api.get(`/users/${username}`);
+      await AsyncStorage.setItem('@GitHuber:status', String('Online'));
+      await AsyncStorage.setItem('@GitHuber:username', String(response.data.login));
+      await AsyncStorage.setItem('@GitHuber:userData', JSON.stringify(response.data));
       const { navigation } = this.props;
       navigation.navigate('User');
 
