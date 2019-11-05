@@ -179,6 +179,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-screens')
+    implementation project(':react-native-reanimated')
     implementation project(':react-native-vector-icons')
     implementation project(':@react-native-community_async-storage')
     implementation project(':react-native-gesture-handler')
@@ -192,6 +194,9 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
 }
 
 // Run this once to be able to run the application with BUCK

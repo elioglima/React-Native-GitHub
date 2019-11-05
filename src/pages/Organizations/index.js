@@ -1,4 +1,5 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import {
   SafeAreaView,
@@ -12,11 +13,18 @@ import {
 
 import Header from '../../components/Header';
 
-const Organizations = () => {
-  return (
-    <SafeAreaView>
-      <Header title={'Repositórios'} />
-    </SafeAreaView>
-  );
+class Organizations extends React.Component {
+  render() {
+    return (
+      <SafeAreaView>
+        <Header title={'Organização'} />
+      </SafeAreaView>
+    );
+  }
 };
+
+Organizations.navigationOptions = {
+  tabBarIcon: ({ tintColor }) => <Icon name="building" size={20} color={tintColor} />
+}
+
 export default Organizations;

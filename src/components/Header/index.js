@@ -9,22 +9,22 @@ import {
 
 import styles from './styles';
 import PropTypes from 'prop-types';
-import {colors} from '../../styles';
+import { colors } from '../../styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {withNavigation} from 'react-navigation';
+import { withNavigation } from 'react-navigation';
 class Header extends React.Component {
   //   static prototype = {
   //     title: PropTypes.string.isRequired,
   //   };
   signOut = async () => {
     await AsyncStorage.clear();
-    this.props.navigation.navigate('LogIn');
+    this.props.navigation.navigate('Welcome');
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar barStyle="dark-content" backgroundColor={colors.white} />
+        <StatusBar barStyle="dark-content" backgroundColor={colors.secundary} />
         <View style={styles.left} />
         <Text style={styles.title}>{this.props.title}</Text>
         <TouchableOpacity onPress={this.signOut}>

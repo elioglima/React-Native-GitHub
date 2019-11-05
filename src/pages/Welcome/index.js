@@ -11,7 +11,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-import {colors} from '../../styles';
+import { colors } from '../../styles';
 import api from '../../services/api';
 
 export default class Welcome extends React.Component {
@@ -31,17 +31,18 @@ export default class Welcome extends React.Component {
   };
 
   signIn = async () => {
-    const {username} = this.state;
-    this.setState({loading: true});
+    const { username } = this.state;
+    this.setState({ loading: true });
 
     try {
       await this.checkUserExists(username);
       await this.saveUser(username);
-      const {navigation} = this.props;
+      const { navigation } = this.props;
       navigation.navigate('User');
+
     } catch (error) {
-      this.setState({loading: false});
-      this.setState({errLogin: true});
+      this.setState({ loading: false });
+      this.setState({ errLogin: true });
     }
   };
   render() {
@@ -63,17 +64,17 @@ export default class Welcome extends React.Component {
             placeholder="Digite seu usuátio"
             underlineColorAndroid="transparent"
             value={this.state.username}
-            onChangeText={text => this.setState({username: text})}
+            onChangeText={text => this.setState({ username: text })}
           />
           {this.state.errLogin && (
-            <Text style={{color: colors.danger}}>Usuário inválido</Text>
+            <Text style={{ color: colors.danger }}>Usuário inválido</Text>
           )}
           <TouchableOpacity style={styles.button} onPress={this.signIn}>
             {this.state.loading ? (
               <ActivityIndicator size="small" color="#fff" />
             ) : (
-              <Text style={styles.buttonText}>Prosseguir</Text>
-            )}
+                <Text style={styles.buttonText}>Prosseguir</Text>
+              )}
           </TouchableOpacity>
         </View>
       </View>
