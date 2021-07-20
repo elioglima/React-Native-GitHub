@@ -15,7 +15,7 @@
     "github-api": "^3.3.0",
     "prop-types": "^15.7.2",
     "react": "16.9.0",
-    "react-native": "0.61.4",
+    "react-native": "0.62.3",
     "react-native-base64": "^0.0.2",
     "react-native-fs": "^2.16.1",
     "react-native-gesture-handler": "^1.5.0",
